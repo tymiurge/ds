@@ -1,5 +1,10 @@
 import NullableQueueProcessingError from './exceptions/NullableQueueProcessingError'
+import InvalidQueueCapacityValueError from './exceptions/InvalidQueueCapacityValueError'
+import QueueCapacityExceededError from './exceptions/QueueCapacityExceededError'
 // https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
+
+// different approaches of creating classes/modules in JS:
+// https://stackoverflow.com/questions/55611/javascript-private-methods
 
 // rear - at the back
 // enqueue - put to a queue
@@ -12,10 +17,19 @@ import NullableQueueProcessingError from './exceptions/NullableQueueProcessingEr
 // 
 function Queue(options = {}) {
     this.exceptionOnExceed = false || options.exceptionOnExceed
+    this.capacity = -1 || function(option) {
+            if (option <=0 || !Number.isInteger(option)) {
+                throw new InvalidQueueCapacityValueError()
+            }
+            return option
+        }(options.capacity)
     this.queue = []
 }
 
 Queue.prototype.put = function(node) {
+    if (this.capacity !== -1 && this.queue.length - 1 === this.capacity) {
+        throw new QueueCapacityExceededError(this.capacity)
+    }
     this.queue.push(node)
 }
 
