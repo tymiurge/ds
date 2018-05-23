@@ -1,3 +1,4 @@
+import NullableQueueProcessingError from './exceptions/NullableQueueProcessingError'
 // https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
 
 // rear - at the back
@@ -9,21 +10,29 @@
 // Circular queue
 // priority queue
 // 
-function Queue() {
-    this.queue = []
+function Queue(options = {}) {
+    let exceptionOnExceed = false || options.exceptionOnExceed
+    let queue = []
 }
 
 Queue.prototype.put = function(node) {
-    this.queue.push(node)
+    queue.push(node)
 }
 
 Queue.prototype.size = function() {
-    return this.queue.length
+    return queue.length
 }
 
 Queue.prototype.get = function() {
-    let node = this.queue[0]
-    this.queue = this.queue.slice(1, this.queue.length - 1)
+    if (queue.length === 0) {
+        if (exceptionOnExceed) { 
+            throw new NullableQueueProcessingError() 
+        } else {
+            return null
+        }
+    }
+    let node = queue[0]
+    queue = queue.slice(1, this.queue.length - 1)
     return node
 }
 
