@@ -11,28 +11,28 @@ import NullableQueueProcessingError from './exceptions/NullableQueueProcessingEr
 // priority queue
 // 
 function Queue(options = {}) {
-    let exceptionOnExceed = false || options.exceptionOnExceed
-    let queue = []
+    this.exceptionOnExceed = false || options.exceptionOnExceed
+    this.queue = []
 }
 
 Queue.prototype.put = function(node) {
-    queue.push(node)
+    this.queue.push(node)
 }
 
 Queue.prototype.size = function() {
-    return queue.length
+    return this.queue.length
 }
 
 Queue.prototype.get = function() {
-    if (queue.length === 0) {
-        if (exceptionOnExceed) { 
+    if (this.queue.length === 0) {
+        if (this.exceptionOnExceed) { 
             throw new NullableQueueProcessingError() 
         } else {
             return null
         }
     }
-    let node = queue[0]
-    queue = queue.slice(1, this.queue.length - 1)
+    let node = this.queue[0]
+    this.queue = this.queue.slice(1, this.queue.length - 1)
     return node
 }
 
