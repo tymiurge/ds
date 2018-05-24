@@ -20,7 +20,7 @@ function Queue(options = {}) {
     this.capacity = -1
     var capacityOffer = options.capacity
     if (!(capacityOffer === undefined)) {
-        if (capacityOffer <= 0 || !Number.isInteger(option)) {
+        if (capacityOffer <= 0 || !Number.isInteger(capacityOffer)) {
             throw new InvalidQueueCapacityValueError()
         }
         this.capacity = capacityOffer
@@ -29,7 +29,7 @@ function Queue(options = {}) {
 }
 
 Queue.prototype.put = function(node) {
-    if (this.capacity !== -1 && this.queue.length - 1 === this.capacity) {
+    if (this.capacity !== -1 && this.queue.length === this.capacity) {
         throw new QueueCapacityExceededError(this.capacity)
     }
     this.queue.push(node)
