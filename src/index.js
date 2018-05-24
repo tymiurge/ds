@@ -1,1 +1,2 @@
-export default 'Welcome to ds'
+import Queue from './queue'
+export default Queue

@@ -24,14 +24,31 @@ describe('Module template', () => {
     })
 
     it('if Queue.exceptionOnExceed is true than exception is thrown at processing null queue', () => {
-        let queue = new Queue()
+        let queue = new Queue({exceptionOnExceed: true})
+        let cought = false
         queue.put('node')
         queue.get()
         try {
             queue.get()
         } catch(error) {
+            cought = true
             expect(error.name).toBe('NullableQueueProcessingError')
             expect(error.message).toBe('No nodes in the queue')
+        } finally {
+            expect(cought).toBe(true)
+        }
+    })
+
+    it('exception is thrown at setting negative capacity', () => {
+        let cought = false
+        try {
+            let queue = new Queue({capacity: -2})
+        } catch(error) {
+            cought = true
+            expect(error.name).toBe('InvalidQueueCapacityValueError')
+            expect(error.message).toBe('Queue capacity might be set only to a positive integer')
+        } finally {
+            expect(cought).toBe(true)
         }
     })
 })

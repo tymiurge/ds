@@ -17,12 +17,14 @@ import QueueCapacityExceededError from './exceptions/QueueCapacityExceededError'
 // 
 function Queue(options = {}) {
     this.exceptionOnExceed = false || options.exceptionOnExceed
-    this.capacity = -1 || function(option) {
-            if (option <=0 || !Number.isInteger(option)) {
-                throw new InvalidQueueCapacityValueError()
-            }
-            return option
-        }(options.capacity)
+    this.capacity = -1
+    var capacityOffer = options.capacity
+    if (!(capacityOffer === undefined)) {
+        if (capacityOffer <= 0 || !Number.isInteger(option)) {
+            throw new InvalidQueueCapacityValueError()
+        }
+        this.capacity = capacityOffer
+    }
     this.queue = []
 }
 
