@@ -81,8 +81,12 @@ describe('Module template', () => {
         }
     })
 
-    it('test on dequeue!!', () => {
-        expect(true).toBe(false)
+    it('queue.put(node) puts the node to the last index', () => {
+        let queue = new Queue()
+        queue.put(1)
+        queue.put(2)
+        expect(queue.get()).toBe(1)
+        expect(queue.get()).toBe(2)
     })
 })
 

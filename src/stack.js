@@ -1,3 +1,5 @@
+// make it Persistent data structures
+
 function Stack(options = {}) {
     this.data = []
 }

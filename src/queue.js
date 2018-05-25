@@ -48,7 +48,7 @@ Queue.prototype.get = function() {
         }
     }
     let node = this.queue[0]
-    this.queue = this.queue.slice(1, this.queue.length - 1)
+    this.queue = this.queue.slice(1, this.queue.length)
     return node
 }
 
