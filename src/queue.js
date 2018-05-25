@@ -1,6 +1,7 @@
 import NullableQueueProcessingError from './exceptions/NullableQueueProcessingError'
 import InvalidQueueCapacityValueError from './exceptions/InvalidQueueCapacityValueError'
 import QueueCapacityExceededError from './exceptions/QueueCapacityExceededError'
+import Deck from './deck'
 // https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
 
 // different approaches of creating classes/modules in JS:
@@ -25,31 +26,29 @@ function Queue(options = {}) {
         }
         this.capacity = capacityOffer
     }
-    this.queue = []
+    this.data = []
 }
+
+Queue.prototype = Object.create(Deck.prototype)
 
 Queue.prototype.put = function(node) {
-    if (this.capacity !== -1 && this.queue.length === this.capacity) {
+    if (this.capacity !== -1 && this.data.length === this.capacity) {
         throw new QueueCapacityExceededError(this.capacity)
     }
-    this.queue.push(node)
-}
-
-Queue.prototype.size = function() {
-    return this.queue.length
+    this.data.push(node)
 }
 
 Queue.prototype.get = function() {
-    if (this.queue.length === 0) {
+    if (this.data.length === 0) {
         if (this.exceptionOnExceed) { 
             throw new NullableQueueProcessingError() 
         } else {
             return null
         }
     }
-    let node = this.queue[0]
-    this.queue = this.queue.slice(1, this.queue.length)
-    return node
+    let node = this.data[0]
+    this.data = this.data.slice(1, this.queue.length)
+    return data
 }
 
 Queue.prototype.constructor = Queue
