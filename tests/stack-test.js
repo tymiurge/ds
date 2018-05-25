@@ -8,4 +8,12 @@ describe('Module template', () => {
         stack.put('a node')
         expect(stack.size()).toBe(1)
     })
+
+    it('stack: put(node) puts the node to the 0 index', () => {
+        let stack = new Stack()
+        stack.put('first node')
+        stack.put('second node')
+        expect(stack.get()).toBe('second node')
+        expect(stack.get()).toBe('first node')
+    })
 })
