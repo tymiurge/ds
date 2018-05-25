@@ -1,2 +1,5 @@
 import Queue from './queue'
-export default Queue
+import Stack from './stack'
+
+
+export default Stack
