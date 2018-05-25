@@ -3,27 +3,27 @@ import Queue from 'src/queue'
 
 
 describe('Module template', () => {
-    it('test whether size is increased at putting a node', () => {
+    it('queue size is increased at putting a node', () => {
         let queue = new Queue()
         queue.put('node')
         expect(queue.size()).toBe(1)
     })
 
-    it('test whether size is decreased at getting a node', () => {
+    it('queue size is decreased at getting a node', () => {
         let queue = new Queue()
         queue.put('node')
         queue.get()
         expect(queue.size()).toBe(0)
     })
 
-    it('test whether null is returned at processing nullable queue', () => {
+    it('queue.get() returns null if the queue is empty', () => {
         let queue = new Queue()
         queue.put('node')
         queue.get()
         expect(queue.get()).toBeNull
     })
 
-    it('if Queue.exceptionOnExceed is true than exception is thrown at processing null queue', () => {
+    it('queue: if exceptionOnExceed = true, get() causes exception', () => {
         let queue = new Queue({exceptionOnExceed: true})
         let cought = false
         queue.put('node')
@@ -39,7 +39,7 @@ describe('Module template', () => {
         }
     })
 
-    it('exception is thrown at setting negative capacity', () => {
+    it('queue: setting negative capacity causes exception', () => {
         let cought = false
         try {
             let queue = new Queue({capacity: -2})
@@ -52,7 +52,7 @@ describe('Module template', () => {
         }
     })
 
-    it('exception is thrown at setting capacity to a not int', () => {
+    it('queue: setting not an int capacity causes exception', () => {
         let cought = false
         try {
             let queue = new Queue({capacity: 'not int'})
@@ -65,7 +65,7 @@ describe('Module template', () => {
         }
     })
 
-    it('QueueCapacityExceededError thrown at exceeding queue capacity', () => {
+    it('queue: QueueCapacityExceededError thrown at exceeding queue capacity', () => {
         let cought = false
         let queue = new Queue({capacity: 1})
         queue.put(1)
