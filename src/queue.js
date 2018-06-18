@@ -17,6 +17,7 @@ import Deck from './deck'
 // priority queue
 // 
 function Queue(options = {}) {
+    /*
     this.exceptionOnExceed = false || options.exceptionOnExceed
     this.capacity = -1
     var capacityOffer = options.capacity
@@ -27,17 +28,21 @@ function Queue(options = {}) {
         this.capacity = capacityOffer
     }
     this.data = []
+    */
+   Deck.call(this)
 }
 
 Queue.prototype = Object.create(Deck.prototype)
 
 Queue.prototype.put = function(node) {
-    if (this.capacity !== -1 && this.data.length === this.capacity) {
+    /*if (this.capacity !== -1 && this.data.length === this.capacity) {
         throw new QueueCapacityExceededError(this.capacity)
     }
     this.data.push(node)
+    */
+   this.enqueue(node)
 }
-
+/*
 Queue.prototype.get = function() {
     if (this.data.length === 0) {
         if (this.exceptionOnExceed) { 
@@ -52,5 +57,5 @@ Queue.prototype.get = function() {
 }
 
 Queue.prototype.constructor = Queue
-
+*/
 export default Queue

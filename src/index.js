@@ -2,4 +2,7 @@ import Queue from './queue'
 import Stack from './stack'
 
 
-export default Stack
+export default Queue
+
+// export { Queue }
+// export { Stack }
