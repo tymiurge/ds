@@ -18,10 +18,9 @@ import Deck from './deck'
 // 
 function Queue(options = {}) {
     this.options = {
-        exceptionOnExceed: false || options.exceptionOnExceed,
-        /**
-         * will be set to -1 if limit is assumed
-         */
+        /** if false NullableQueueProcessingError is thrown at performing get operation on empty queue */
+        inexhaustive: options.inexhaustive === undefined ? true : options.inexhaustive,
+        /** default value is -1 - meaning the queue is not limited */
         capacity: 
             (function(capacityOffer) {
                 let result = -1
@@ -44,27 +43,14 @@ Queue.prototype.put = function(node) {
     if (capacity !== -1 && this.size() === capacity) {
         throw new QueueCapacityExceededError(capacity)
     }
-    //this.data.push(node)
    this.enqueue(node)
 }
 
 Queue.prototype.get = function() {
+    if (!this.options.inexhaustive && this.size() === 0) {
+        throw new NullableQueueProcessingError()
+    } 
     return this.dequeue()
 }
-/*
-Queue.prototype.get = function() {
-    if (this.data.length === 0) {
-        if (this.exceptionOnExceed) { 
-            throw new NullableQueueProcessingError() 
-        } else {
-            return null
-        }
-    }
-    let node = this.data[0]
-    this.data = this.data.slice(1, this.queue.length)
-    return data
-}
 
-Queue.prototype.constructor = Queue
-*/
 export default Queue
