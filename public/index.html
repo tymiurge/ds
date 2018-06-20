@@ -10,12 +10,15 @@
     <script src='./../umd/ds.js'></script>
     <script>
         console.log('here')
-        var q = new ds()
-        q.put(1)
+        var q = new ds.Queue() //{inexhaustive: false}
+        //var s = q.size()
+        q.get()
+        console.log(s)
+        /*q.put(1)
         q.put(2)
-        //let first = s.get()
-        //let second = s.get()
-        console.log(q.size())
+        let first = q.get()
+        let second = q.get()
+        console.log(q.size())*/
     </script>
 </head>
 

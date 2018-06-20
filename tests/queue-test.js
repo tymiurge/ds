@@ -1,8 +1,17 @@
 import expect from 'expect'
-import Queue from 'src/queue'
+import  Queue  from 'src/queue'
 
 
 describe('Module template', () => {
+
+    it('queue size is 0 just after creating queue', () => {
+        let q1 = new Queue()
+        q1.put('node in q1')
+        let q2 = new Queue()
+        expect(q2.size()).toBe(0)
+    })
+
+
     it('queue size is increased at putting a node', () => {
         let queue = new Queue()
         queue.put('node')
@@ -23,11 +32,9 @@ describe('Module template', () => {
         expect(queue.get()).toBeNull
     })
 
-    it('queue: if exceptionOnExceed = true, get() causes exception', () => {
-        let queue = new Queue({exceptionOnExceed: true})
+    it('queue: if inexhaustive = false, get() causes exception', () => {
+        let queue = new Queue({inexhaustive: false})
         let cought = false
-        queue.put('node')
-        queue.get()
         try {
             queue.get()
         } catch(error) {
