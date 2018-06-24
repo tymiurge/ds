@@ -1,31 +1,35 @@
 // make it Persistent data structures
+import Deck from './deck'
 
 function Stack(options = {}) {
-    this.data = []
+    this.options = {
+        /** default value is -1 - meaning the queue is not limited */
+        /*
+        capacity: 
+            (function(capacityOffer) {
+                let result = -1
+                if (!(capacityOffer === undefined)) {
+                    if (capacityOffer <= 0 || !Number.isInteger(capacityOffer)) {
+                        throw new InvalidQueueCapacityValueError()
+                    }
+                    result = capacityOffer
+                }
+                return result            
+            })(options.capacity)
+        */
+    }
+    Deck.call(this, options)
 }
 
-function enqueue(node) {
-    this.data = [node].concat(this.data)
-}
-
-function dequeue() {
-    let node = this.data[0]
-    this.data = this.data.slice(1, this.data.length)
-    return node
-}
+Stack.prototype = Object.create(Deck.prototype)
 
 Stack.prototype.put = function(node) {
-    enqueue.call(this, node)
+    this.putToHead(node)
 }
 
-Stack.prototype.size = function() {
-    return this.data.length
-}
 
 Stack.prototype.get = function() {
-    return dequeue.call(this)
+    return this.dequeue()
 }
-
-Stack.prototype.constructor = Stack
 
 export default Stack
