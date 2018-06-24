@@ -1,6 +1,6 @@
 
-import QueueCapacityExceededError from './exceptions/QueueCapacityExceededError'
-import InvalidQueueCapacityValueError from './exceptions/InvalidQueueCapacityValueError'
+import CapacityExceededError from './exceptions/CapacityExceededError'
+import InvalidCapacityValueError from './exceptions/InvalidCapacityValueError'
 
 function Deck(options = {}) {
     let data = []
@@ -11,7 +11,7 @@ function Deck(options = {}) {
                 let result = -1
                 if (!(capacityOffer === undefined)) {
                     if (capacityOffer <= 0 || !Number.isInteger(capacityOffer)) {
-                        throw new InvalidQueueCapacityValueError()
+                        throw new InvalidCapacityValueError()
                     }
                     result = capacityOffer
                 }
@@ -22,7 +22,7 @@ function Deck(options = {}) {
     function exceedsCapacity(size) {
         const { capacity } = deckOptions
         if (size === capacity) {
-            throw new QueueCapacityExceededError(capacity)
+            throw new CapacityExceededError(capacity)
         }
     }
 

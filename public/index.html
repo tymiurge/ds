@@ -10,9 +10,10 @@
     <script src='./../umd/ds.js'></script>
     <script>
         console.log('here')
-        var q = new ds.Queue() //{inexhaustive: false}
+        var q = new ds.Queue({capacity: 1}) //{inexhaustive: false}
         //var s = q.size()
-        q.get()
+        q.put('1')
+        q.put('2')
         console.log(s)
         /*q.put(1)
         q.put(2)

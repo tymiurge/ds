@@ -52,8 +52,8 @@ describe('Module template', () => {
             let queue = new Queue({capacity: -2})
         } catch(error) {
             cought = true
-            expect(error.name).toBe('InvalidQueueCapacityValueError')
-            expect(error.message).toBe('Queue capacity might be set only to a positive integer')
+            expect(error.name).toBe('InvalidCapacityValueError')
+            expect(error.message).toBe('Queue or Stack capacity might be set only to a positive integer')
         } finally {
             expect(cought).toBe(true)
         }
@@ -65,14 +65,14 @@ describe('Module template', () => {
             let queue = new Queue({capacity: 'not int'})
         } catch(error) {
             cought = true
-            expect(error.name).toBe('InvalidQueueCapacityValueError')
-            expect(error.message).toBe('Queue capacity might be set only to a positive integer')
+            expect(error.name).toBe('InvalidCapacityValueError')
+            expect(error.message).toBe('Queue or Stack capacity might be set only to a positive integer')
         } finally {
             expect(cought).toBe(true)
         }
     })
 
-    it('queue: QueueCapacityExceededError thrown at exceeding queue capacity', () => {
+    it('queue: CapacityExceededError thrown at exceeding queue capacity', () => {
         let cought = false
         let queue = new Queue({capacity: 1})
         queue.put(1)
@@ -81,8 +81,8 @@ describe('Module template', () => {
             queue.put(2)    
         } catch(error) {
             cought = true
-            expect(error.name).toBe('QueueCapacityExceededError')
-            expect(error.message).toBe('Queue capacity can not exceed 1 value')
+            expect(error.name).toBe('CapacityExceededError')
+            expect(error.message).toBe('Capacity can not exceed 1 value')
         } finally {
             expect(cought).toBe(true)
         }
