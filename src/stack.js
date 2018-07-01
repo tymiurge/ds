@@ -1,35 +1,24 @@
-// make it Persistent data structures
 import Deck from './deck'
+//  Crockford's private pattern
 
-function Stack(options = {}) {
-    this.options = {
-        /** default value is -1 - meaning the queue is not limited */
-        /*
-        capacity: 
-            (function(capacityOffer) {
-                let result = -1
-                if (!(capacityOffer === undefined)) {
-                    if (capacityOffer <= 0 || !Number.isInteger(capacityOffer)) {
-                        throw new InvalidQueueCapacityValueError()
-                    }
-                    result = capacityOffer
-                }
-                return result            
-            })(options.capacity)
-        */
+const Stack = (function() {
+    function Stack(options = {}) {
+        this.options = {
+            // for future use
+        }
+        Deck.call(this, options)    
     }
-    Deck.call(this, options)
-}
+    
+    Stack.prototype.put = function(node) {
+        this.putToHead(node)
+    }
 
-Stack.prototype = Object.create(Deck.prototype)
+    Stack.prototype.get = function() {
+        return this.dequeue()
+    }
 
-Stack.prototype.put = function(node) {
-    this.putToHead(node)
-}
-
-
-Stack.prototype.get = function() {
-    return this.dequeue()
-}
+    return Stack
+        
+})()
 
 export default Stack

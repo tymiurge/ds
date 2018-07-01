@@ -39,4 +39,5 @@ describe('Stack tests', () => {
             expect(cought).toBeTruthy()
         }
     })
+
 })
