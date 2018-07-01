@@ -53,6 +53,10 @@ function Deck(options = {}) {
         : function(node) {
             data = [node, ...data]
         }
+
+    this.toArray = function() {
+        return data;
+    }
     
 }
 

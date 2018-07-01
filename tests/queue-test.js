@@ -2,7 +2,7 @@ import expect from 'expect'
 import  Queue  from 'src/queue'
 
 
-describe('Module template', () => {
+describe('Queue tests', () => {
 
     it('queue size is 0 just after creating queue', () => {
         let q1 = new Queue()
@@ -95,5 +95,15 @@ describe('Module template', () => {
         expect(queue.get()).toBe(1)
         expect(queue.get()).toBe(2)
     })
+
+    it('queue.toArray() returns array of previously added nodes', () => {
+        let queue = new Queue()
+        const nodes = ['first', 'second']
+        nodes.forEach(node => queue.put(node))
+        expect(
+            queue.toArray().every( (node, idx) => nodes[idx] === node ) 
+        ).toBeTruthy()
+    })
+
 })
 

@@ -2,7 +2,7 @@ import expect from 'expect'
 import Stack from 'src/stack'
 
 
-describe('Module template', () => {
+describe('Stack tests', () => {
     it('stack size is increased at putting a node', () => {
         let stack = new Stack()
         stack.put('a node')
@@ -15,6 +15,16 @@ describe('Module template', () => {
         stack.put('second node')
         expect(stack.get()).toBe('second node')
         expect(stack.get()).toBe('first node')
+    })
+
+    it('stack.toArray returns array of previously added nodes', () => {
+        let stack = new Stack()
+        const nodes = ['first', 'second']
+        nodes.forEach(node => stack.put(node))
+        const reversedNodes = nodes.reverse()
+        expect(
+            stack.toArray().every( (node, idx) => reversedNodes[idx] === node ) 
+        ).toBeTruthy()
     })
 
     it('stack: CapacityExceededError at exceeding capacity', () => {
