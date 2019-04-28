@@ -6,3 +6,6 @@ In general stack DS can be used for backtracking problems to remember tasks or p
 ### convert decimal into binary 
 @see decimal-to-binary.js
 
+### the basee converter algorithm
+@ see decimal-to-base.js
+
